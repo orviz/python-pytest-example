@@ -1,0 +1,23 @@
+on: [push]
+
+jobs:
+  sqaaas_step_job:
+    runs-on: ubuntu-latest
+    name: Job that triggers a custom SQAaaS assessment
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Step definition for a SQAaaS assessment
+        uses: eosc-synergy/sqaaas-step-action@v1
+        with:
+          name: pytest_step
+          tool: commands
+          commands: |
+            pip install -r requirements
+            pytest -v ./tests
+      - name: Print payload
+        run: cat pytest_step.json
+      - name: Run SQAaaS assessment
+        uses: eosc-synergy/sqaaas-assessment-action@feature/criteria_workflows
+        with:
+          steps: pytest_step
