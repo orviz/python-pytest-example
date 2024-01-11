@@ -18,6 +18,6 @@ jobs:
       - name: Print payload
         run: cat pytest_step.json
       - name: Run SQAaaS assessment
-        uses: eosc-synergy/sqaaas-assessment-action@feature/criteria_workflows
+        uses: eosc-synergy/sqaaas-assessment-action@feature/name_steps
         with:
-          steps: pytest_step
+          qc_uni_steps: pytest_step
